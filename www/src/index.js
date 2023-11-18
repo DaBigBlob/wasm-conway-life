@@ -47,8 +47,11 @@ init().then((init_out) => {
         ctx.stroke();
     };
 
+    let lcount=0;
     const renderLoop = () => {
-        universe.tick(); console.log("tick");
+        universe.tick();
+        //if (lcount%10000==0) universe.sprincle(0.5);
+
         drawCells();
         setTimeout(() => requestAnimationFrame(renderLoop), 50);
     };

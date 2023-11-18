@@ -69,6 +69,12 @@ export class Universe {
         return Universe.__wrap(ret);
     }
     /**
+    * @param {number} frequency
+    */
+    sprincle(frequency) {
+        wasm.universe_sprincle(this.__wbg_ptr, frequency);
+    }
+    /**
     * @returns {number}
     */
     cells() {

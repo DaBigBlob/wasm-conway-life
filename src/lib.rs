@@ -96,6 +96,16 @@ impl Universe {
         }
     }
 
+    pub fn sprincle(&mut self, mut frequency: f64) {
+        frequency /= 100 as f64;
+        self.cells = self.cells.iter()
+            .map(|c| { 
+                if js_sys::Math::random() < frequency {Cell::Alive}
+                else {c.clone()}
+            })
+            .collect();
+    }
+
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
     }
