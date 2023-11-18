@@ -1,11 +1,6 @@
 import init, { Universe, Cell } from "./conway_life.js";
 
-const gcd = (a, b) => {
-    if (!b) return a;
-    return gcd(b, a % b);
-}
-
-const CELL_SIZE = gcd(window.innerWidth, window.innerHeight)*7; // px
+const CELL_SIZE = 2; // px
 const DEAD_COLOR = "#000000";
 const ALIVE_COLOR = "#ED1C24";
 const UWIDTH = Math.floor(window.innerWidth/CELL_SIZE);
