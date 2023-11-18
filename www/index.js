@@ -1,4 +1,4 @@
-import init, { Universe, Cell } from "../pkg/conway_life.js";
+import init, { Universe, Cell } from "./conway_life.js";
 
 const gcd = (a, b) => {
     if (!b) return a;
