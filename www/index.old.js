@@ -7,7 +7,7 @@ const gcd = (a, b) => {
 
 const CELL_SIZE = gcd(window.innerWidth, window.innerHeight)*6; // px
 const GRID_COLOR = "#CCCCCC";
-const DEAD_COLOR = "rgba(255, 165, 0, 1)";
+const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
 const UWIDTH = Math.floor(window.innerWidth/CELL_SIZE);
 const UHEIGHT = Math.floor(window.innerHeight/CELL_SIZE);
@@ -26,6 +26,27 @@ init().then((init_out) => {
     canvas.width = CELL_SIZE*UWIDTH;
 
     const ctx = canvas.getContext('2d');
+
+    //stuff
+    const drawGrid = () => {
+        ctx.beginPath();
+        ctx.strokeStyle = GRID_COLOR;
+        console.log("gg")
+      
+        // Vertical lines.
+        for (let i = 0; i <= UWIDTH; i++) {
+          ctx.moveTo(i * (CELL_SIZE + 1) + 1, 0);
+          ctx.lineTo(i * (CELL_SIZE + 1) + 1, (CELL_SIZE + 1) * height + 1);
+        }
+      
+        // Horizontal lines.
+        for (let j = 0; j <= height; j++) {
+          ctx.moveTo(0,                           j * (CELL_SIZE + 1) + 1);
+          ctx.lineTo((CELL_SIZE + 1) * UWIDTH + 1, j * (CELL_SIZE + 1) + 1);
+        }
+      
+        ctx.stroke();
+    };
       
     const drawCells = () => {
         const cellsPtr = universe.cells();
@@ -42,8 +63,8 @@ init().then((init_out) => {
               : ALIVE_COLOR;
       
             ctx.fillRect(
-              col * (CELL_SIZE) + 1,
-              row * (CELL_SIZE) + 1,
+              col * (CELL_SIZE + 1) + 1,
+              row * (CELL_SIZE + 1) + 1,
               CELL_SIZE,
               CELL_SIZE
             );
@@ -56,9 +77,11 @@ init().then((init_out) => {
     const renderLoop = () => {
     universe.tick(); console.log("tick");
     drawCells();
-    setTimeout(() => requestAnimationFrame(renderLoop), 50);
+    setTimeout(() => requestAnimationFrame(renderLoop), 0);
     };
 
+
+    drawGrid();
     requestAnimationFrame(renderLoop);
 });
 
