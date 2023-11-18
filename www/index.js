@@ -5,10 +5,9 @@ const gcd = (a, b) => {
     return gcd(b, a % b);
 }
 
-const CELL_SIZE = gcd(window.innerWidth, window.innerHeight)*6; // px
-const GRID_COLOR = "#CCCCCC";
-const DEAD_COLOR = "rgba(255, 165, 0, 1)";
-const ALIVE_COLOR = "#000000";
+const CELL_SIZE = gcd(window.innerWidth, window.innerHeight)*7; // px
+const DEAD_COLOR = "#000000";
+const ALIVE_COLOR = "#ED1C24";
 const UWIDTH = Math.floor(window.innerWidth/CELL_SIZE);
 const UHEIGHT = Math.floor(window.innerHeight/CELL_SIZE);
 //alert("sell="+CELL_SIZE+" height="+UHEIGHT+" weidth="+UWIDTH);
