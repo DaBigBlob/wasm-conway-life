@@ -1,2 +1,2 @@
 # wasm-conway-life
-first attempts at learning rust -> wasm
+my first attempt at learning rust -> wasm
