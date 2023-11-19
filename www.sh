@@ -1,6 +1,6 @@
 #!/bin/sh
 
-./build
+./build.sh
 cp ./pkg/conway_life_bg.wasm ./www/dist/
 cp ./pkg/conway_life.js ./www/src
 cp ./www/src/index.html ./www/dist/
