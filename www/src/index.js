@@ -18,31 +18,27 @@ init().then((init_out) => {
     canvas.width = CELL_SIZE*UWIDTH;
 
     //eventlistener
-    let touchOn = false;
-    canvas.addEventListener("touchstart", (ev) => {
-        universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-        touchOn=true;
-    });
-    canvas.addEventListener("mousedown", (ev) => {
-        universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-        touchOn=true;
-    });
-    canvas.addEventListener("touchend", () => {touchOn=false;});
-    canvas.addEventListener("touchcancel", () => {touchOn=false;});
-    canvas.addEventListener("mouseup", () => {touchOn=false;});
-    canvas.addEventListener("mousemove", (ev) => {
-        if (!touchOn) return;
-        universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-    });
-    canvas.addEventListener("touchmove", (ev) => {
-        if (!touchOn) return;
-        universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-    });
-
-    // canvas.addEventListener("click", (ev) => {
-    //     let m = universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-    //     console.log("row="+Math.floor(ev.clientY/CELL_SIZE)+" column="+Math.floor(ev.clientX/CELL_SIZE)+" uwidth="+UWIDTH+" uheight="+UHEIGHT+" togg="+m);
-    // })
+    // let touchOn = false;
+    // canvas.addEventListener("touchstart", (ev) => {
+    //     universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    //     touchOn=true;
+    // });
+    // canvas.addEventListener("mousedown", (ev) => {
+    //     universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    //     touchOn=true;
+    // });
+    // canvas.addEventListener("touchend", () => {touchOn=false;});
+    // canvas.addEventListener("touchcancel", () => {touchOn=false;});
+    // canvas.addEventListener("mouseup", () => {touchOn=false;});
+    // canvas.addEventListener("mousemove", (ev) => {
+    //     if (!touchOn) return;
+    //     universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    // });
+    // canvas.addEventListener("touchmove", (ev) => {
+    //     if (!touchOn) return;
+    //     universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    // });
+    canvas.addEventListener("click", () => universe.sprincle(2));
 
     const ctx = canvas.getContext('2d');
       
@@ -92,8 +88,6 @@ init().then((init_out) => {
 
     const renderLoop = () => {
         document.getElementById("universe-info").innerText = "age: "+universe.tick();
-        if (universe.age()%1000==0) universe.sprincle(2);
-
         drawCells();
         setTimeout(() => requestAnimationFrame(renderLoop), 50);
     };
