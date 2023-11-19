@@ -81,6 +81,13 @@ export class Universe {
         const ret = wasm.universe_cells(this.__wbg_ptr);
         return ret >>> 0;
     }
+    /**
+    * @returns {number}
+    */
+    age() {
+        const ret = wasm.universe_age(this.__wbg_ptr);
+        return ret >>> 0;
+    }
 }
 
 async function __wbg_load(module, imports) {

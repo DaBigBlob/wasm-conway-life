@@ -47,10 +47,10 @@ init().then((init_out) => {
         ctx.stroke();
     };
 
-    let lcount=0;
     const renderLoop = () => {
         universe.tick();
-        //if (lcount%10000==0) universe.sprincle(0.5);
+        if (universe.age()%100==0) universe.sprincle(1);
+        console.log(universe.age());
 
         drawCells();
         setTimeout(() => requestAnimationFrame(renderLoop), 50);

@@ -21,6 +21,7 @@ pub struct Universe {
     width: u32,
     height: u32,
     cells: Vec<Cell>,
+    age: usize
 }
 
 /// Public methods, exported to JavaScript.
@@ -76,7 +77,7 @@ impl Universe {
                 next[idx] = next_cell;
             }
         }
-
+        self.age += 1;
         self.cells = next;
     }
 
@@ -93,6 +94,7 @@ impl Universe {
             width,
             height,
             cells,
+            age: 0
         }
     }
 
@@ -108,5 +110,9 @@ impl Universe {
 
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
+    }
+
+    pub fn age(&self) -> usize {
+        self.age
     }
 }
