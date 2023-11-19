@@ -48,7 +48,7 @@ impl Universe {
         count
     }
 
-    pub fn tick(&mut self) {
+    pub fn tick(&mut self) -> usize{
         let mut next = self.cells.clone();
 
         for row in 0..self.height {
@@ -77,8 +77,9 @@ impl Universe {
                 next[idx] = next_cell;
             }
         }
-        self.age = self.age.wrapping_add(1);
         self.cells = next;
+        self.age = self.age.wrapping_add(1);
+        self.age
     }
 
     pub fn new(width: u32, height: u32) -> Universe {
@@ -98,12 +99,15 @@ impl Universe {
         }
     }
 
-    pub fn sprincle(&mut self, mut frequency: f64) {
+    pub fn sprincle(&mut self, mut frequency: f64) -> u32{
         frequency /= 100 as f64;
+        let mut sprink: u32 = 0;
         (0..self.width*self.height)
             .for_each(|i| if js_sys::Math::random() < frequency {
                 self.cells[i as usize] = Cell::Alive;
+                sprink = sprink.wrapping_add(1);
             });
+        sprink
     }
 
     pub fn cells(&self) -> *const Cell {
@@ -112,5 +116,14 @@ impl Universe {
 
     pub fn age(&self) -> usize {
         self.age
+    }
+
+    pub fn toggle_cell(&mut self, row: u32, column: u32) -> usize{
+        let idx = self.get_index(row, column);
+        match self.cells[idx] {
+            Cell::Alive => {self.cells[idx] = Cell::Dead},
+            Cell::Dead => {self.cells[idx] = Cell::Alive},
+        }
+        idx
     }
 }

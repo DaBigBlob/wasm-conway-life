@@ -19,6 +19,12 @@ init().then((init_out) => {
     canvas.height = CELL_SIZE*UHEIGHT;
     canvas.width = CELL_SIZE*UWIDTH;
 
+    //eventlistener
+    canvas.addEventListener("click", (ev) => {
+        let m = universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+        //alert("row="+Math.floor(ev.clientY/CELL_SIZE)+" column="+Math.floor(ev.clientX/CELL_SIZE)+" uwidth="+UWIDTH+" uheight="+UHEIGHT+" togg="+m);
+    })
+
     const ctx = canvas.getContext('2d');
       
     const drawCells = () => {
@@ -48,8 +54,7 @@ init().then((init_out) => {
     };
 
     const renderLoop = () => {
-        universe.tick();
-        document.getElementById("universe-info").innerText = "age: "+universe.age();
+        document.getElementById("universe-info").innerText = "age: "+universe.tick();
         if (universe.age()%1000==0) universe.sprincle(2);
 
         drawCells();

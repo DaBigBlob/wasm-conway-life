@@ -55,9 +55,11 @@ export class Universe {
         return ret >>> 0;
     }
     /**
+    * @returns {number}
     */
     tick() {
-        wasm.universe_tick(this.__wbg_ptr);
+        const ret = wasm.universe_tick(this.__wbg_ptr);
+        return ret >>> 0;
     }
     /**
     * @param {number} width
@@ -70,9 +72,11 @@ export class Universe {
     }
     /**
     * @param {number} frequency
+    * @returns {number}
     */
     sprincle(frequency) {
-        wasm.universe_sprincle(this.__wbg_ptr, frequency);
+        const ret = wasm.universe_sprincle(this.__wbg_ptr, frequency);
+        return ret >>> 0;
     }
     /**
     * @returns {number}
@@ -86,6 +90,15 @@ export class Universe {
     */
     age() {
         const ret = wasm.universe_age(this.__wbg_ptr);
+        return ret >>> 0;
+    }
+    /**
+    * @param {number} row
+    * @param {number} column
+    * @returns {number}
+    */
+    toggle_cell(row, column) {
+        const ret = wasm.universe_toggle_cell(this.__wbg_ptr, row, column);
         return ret >>> 0;
     }
 }
