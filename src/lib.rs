@@ -77,7 +77,7 @@ impl Universe {
                 next[idx] = next_cell;
             }
         }
-        self.age += 1;
+        self.age = self.age.wrapping_add(1);
         self.cells = next;
     }
 
