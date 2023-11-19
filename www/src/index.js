@@ -50,7 +50,7 @@ init().then((init_out) => {
     const renderLoop = () => {
         universe.tick();
         document.getElementById("universe-info").innerText = "age: "+universe.age();
-        //if (universe.age()%100==0) universe.sprincle(1);
+        if (universe.age()%1000==0) universe.sprincle(2);
 
         drawCells();
         setTimeout(() => requestAnimationFrame(renderLoop), 50);
