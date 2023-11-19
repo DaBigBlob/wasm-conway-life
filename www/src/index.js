@@ -15,7 +15,7 @@ init().then((init_out) => {
 
     // Give the canvas room for all of our cells and a 1px border
     // around each of them.
-    const canvas = document.getElementById("game-of-life-canvas");
+    const canvas = document.getElementById("universe-canvas");
     canvas.height = CELL_SIZE*UHEIGHT;
     canvas.width = CELL_SIZE*UWIDTH;
 
@@ -49,8 +49,8 @@ init().then((init_out) => {
 
     const renderLoop = () => {
         universe.tick();
-        if (universe.age()%100==0) universe.sprincle(1);
-        console.log(universe.age());
+        document.getElementById("universe-info").innerText = "age: "+universe.age();
+        //if (universe.age()%100==0) universe.sprincle(1);
 
         drawCells();
         setTimeout(() => requestAnimationFrame(renderLoop), 50);
