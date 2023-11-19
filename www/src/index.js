@@ -51,19 +51,40 @@ init().then((init_out) => {
       
         ctx.beginPath();
       
+        // Alive cells.
+        ctx.fillStyle = ALIVE_COLOR;
         for (let row = 0; row < UHEIGHT; row++) {
-            for (let col = 0; col < UWIDTH; col++) {        
-                ctx.fillStyle = cells[universe.get_index(row, col)] === Cell.Dead
-                    ? DEAD_COLOR
-                    : ALIVE_COLOR;
-        
-                ctx.fillRect(
-                    col * (CELL_SIZE) + 1,
-                    row * (CELL_SIZE) + 1,
-                    CELL_SIZE,
-                    CELL_SIZE
-                );
+        for (let col = 0; col < UWIDTH; col++) {
+            const idx = universe.get_index(row, col);
+            if (cells[idx] !== Cell.Alive) {
+            continue;
             }
+
+            ctx.fillRect(
+            col * (CELL_SIZE) + 1,
+            row * (CELL_SIZE) + 1,
+            CELL_SIZE,
+            CELL_SIZE
+            );
+        }
+        }
+
+        // Dead cells.
+        ctx.fillStyle = DEAD_COLOR;
+        for (let row = 0; row < UHEIGHT; row++) {
+        for (let col = 0; col < UWIDTH; col++) {
+            const idx = universe.get_index(row, col);
+            if (cells[idx] !== Cell.Dead) {
+            continue;
+            }
+
+            ctx.fillRect(
+            col * (CELL_SIZE) + 1,
+            row * (CELL_SIZE) + 1,
+            CELL_SIZE,
+            CELL_SIZE
+            );
+        }
         }
       
         ctx.stroke();
