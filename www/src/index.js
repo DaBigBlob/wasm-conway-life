@@ -10,8 +10,6 @@ const UHEIGHT = Math.floor(window.innerHeight/CELL_SIZE);
 init().then((init_out) => {
     // Construct the universe, and get its width and height.
     const universe = Universe.new(UWIDTH, UHEIGHT);
-    const width = UWIDTH;
-    const height = UHEIGHT;
 
     // Give the canvas room for all of our cells and a 1px border
     // around each of them.
@@ -28,16 +26,13 @@ init().then((init_out) => {
     const ctx = canvas.getContext('2d');
       
     const drawCells = () => {
-        const cellsPtr = universe.cells();
-        const cells = new Uint8Array(init_out.memory.buffer, cellsPtr, width * height);
+        const cells = new Uint8Array(init_out.memory.buffer, universe.cells(), UWIDTH * UHEIGHT);
       
         ctx.beginPath();
       
-        for (let row = 0; row < height; row++) {
-            for (let col = 0; col < UWIDTH; col++) {
-                const idx = universe.get_index(row, col);
-        
-                ctx.fillStyle = cells[idx] === Cell.Dead
+        for (let row = 0; row < UHEIGHT; row++) {
+            for (let col = 0; col < UWIDTH; col++) {        
+                ctx.fillStyle = cells[universe.get_index(row, col)] === Cell.Dead
                     ? DEAD_COLOR
                     : ALIVE_COLOR;
         
