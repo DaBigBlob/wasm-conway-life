@@ -18,10 +18,26 @@ init().then((init_out) => {
     canvas.width = CELL_SIZE*UWIDTH;
 
     //eventlistener
-    canvas.addEventListener("click", (ev) => {
+    let touchOn = false;
+    canvas.addEventListener("touchstart", () => {touchOn=true;});
+    canvas.addEventListener("mousedown", () => {touchOn=true;});
+    canvas.addEventListener("touchend", () => {touchOn=false;});
+    canvas.addEventListener("touchcancel", () => {touchOn=false;});
+    canvas.addEventListener("mouseup", () => {touchOn=false;});
+
+    canvas.addEventListener("mousemove", (ev) => {
+        if (!touchOn) return;
         let m = universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
-        //alert("row="+Math.floor(ev.clientY/CELL_SIZE)+" column="+Math.floor(ev.clientX/CELL_SIZE)+" uwidth="+UWIDTH+" uheight="+UHEIGHT+" togg="+m);
-    })
+        //console.log("row="+Math.floor(ev.clientY/CELL_SIZE)+" column="+Math.floor(ev.clientX/CELL_SIZE)+" uwidth="+UWIDTH+" uheight="+UHEIGHT+" togg="+m);
+    });
+    canvas.addEventListener("touchmove", (ev) => {
+        if (!touchOn) return;
+        universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    });
+
+    // canvas.addEventListener("click", (ev) => {
+    //     let m = universe.toggle_cell(Math.floor(ev.clientY/CELL_SIZE), Math.floor(ev.clientX/CELL_SIZE));
+    // })
 
     const ctx = canvas.getContext('2d');
       
