@@ -1,10 +1,10 @@
 [package]
 name = "conway_life"
 version = "0.1.0"
-# authors = ["Your Name <you@example.com>"]
-# description = "A sample project with wasm-pack"
-# license = "MIT/Apache-2.0"
-# repository = ""
+authors = ["DaBigBlob <_@hman.io>"]
+description = "my first wasm project"
+license = "BSD-3-Clause"
+repository = "https://github.com/DaBigBlob/wasm-conway-life"
 edition = "2021"
 
 [lib]
